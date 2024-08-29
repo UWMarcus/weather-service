@@ -5,7 +5,7 @@ import time
 from fastapi import FastAPI, BackgroundTasks
 from typing import Dict
 from threading import Lock
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.config import Config
 
@@ -60,14 +60,14 @@ def get_open_weather_data(user_id: int):
         tasks_status[user_id] = 'running'
 
     data = {}
-    request_timestamp_datetime = datetime.now()
+    request_timestamp_datetime = datetime.now(timezone.utc)
     request_timestamp = request_timestamp_datetime.strftime('%Y-%m-%d %H:%M:%S')
 
     url = Config.OPENWEATHER_API_URL
     results = []
     
     batches = partition_list(Config.CITIES_IDS)
-    start_reference_time = datetime.now()
+    start_reference_time = datetime.now(timezone.utc)
     for batch in batches:
         for city_id in batch:
             params = {
@@ -89,9 +89,9 @@ def get_open_weather_data(user_id: int):
         if len(results) == len(Config.CITIES_IDS):
             break
 
-        while ((datetime.now() - start_reference_time).seconds/60) < 1:
+        while ((datetime.now(timezone.utc) - start_reference_time).seconds/60) < 1:
             time.sleep(Config.DEFAULT_WAIT_INTERVAL)
-        start_reference_time = datetime.now()
+        start_reference_time = datetime.now(timezone.utc)
     
     data = {
         'user_id': user_id,
