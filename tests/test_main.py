@@ -19,7 +19,7 @@ async def test_start_task_duplicate_user_id(client):
     await client.post('/get_weather_data/-2')
     
     # Attempt to start it again
-    response = await client.post('/get_weather_data/2')
+    response = await client.post('/get_weather_data/-2')
     assert response.status_code == 200
     assert response.json() == {'user_id': -2, 'status': 'Not started due to duplicated user_id'}
 
