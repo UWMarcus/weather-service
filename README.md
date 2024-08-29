@@ -43,6 +43,23 @@ In this application, a JSON file is used instead of a traditional database for s
 
 For more complex applications with larger datasets or requiring sophisticated querying and transaction management, a database would be more appropriate. However, for this project, a JSON file provides an efficient and simple solution that meets the application's requirements.
 
+## Limitations
+
+### API Rate Limiting
+
+The application interacts with the OpenWeather API, which imposes a rate limit of 60 requests per minute for its free subscription tier. To comply with this restriction, the application employs a batching and throttling approach to manage the request rate effectively.
+
+#### Batching and Throttling
+
+To adhere to the API’s rate limits, the application divides the list of city IDs into smaller batches. This ensures that the number of API requests made within a given time frame does not exceed the allowed limit. After processing each batch, the application checks the elapsed time since the last request was made. If the time is less than one minute, the application introduces a delay (configured via `Config.DEFAULT_WAIT_INTERVAL`) to prevent exceeding the rate limit. This approach allows the application to remain within the API’s constraints while fetching data for multiple cities.
+
+#### Impact
+
+While this method helps in managing API usage, it introduces delays in data retrieval. This means that if there are a large number of city IDs or if requests are made frequently, the overall time to complete data fetching may be extended. The throttling mechanism ensures compliance with the API rate limit but may affect the responsiveness of the data retrieval process.
+
+This approach is crucial for staying within the free tier limits of the OpenWeather API and prevents potential issues related to excessive request rates.
+
+
 ## Installation
 
 1. **Clone the repository:**
