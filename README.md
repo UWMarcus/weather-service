@@ -22,6 +22,27 @@ This FastAPI application provides endpoints for fetching weather data from the O
 - Python 3.8+
 - Dependencies listed in `requirements.txt`
 
+## Tools and Frameworks
+
+### FastAPI
+
+FastAPI is used in this project for several compelling reasons:
+
+- **Performance:** FastAPI is built on Starlette for the web parts and Pydantic for the data parts, which provides high performance and fast execution times, making it suitable for handling high loads and real-time data processing.
+- **Ease of Use:** FastAPI simplifies the development process with automatic generation of interactive API documentation (Swagger UI and ReDoc) and type-checking through Python type hints. This improves developer productivity and reduces the likelihood of bugs.
+- **Asynchronous Support:** FastAPI supports asynchronous request handling using Python's `async` and `await` keywords, allowing the application to handle multiple requests concurrently without blocking. This is particularly useful for I/O-bound operations such as API requests.
+- **Automatic Validation:** With FastAPI, request data validation and serialization are automatically handled using Pydantic, ensuring that data passed through the API is validated and conforms to the expected schema.
+
+### JSON File
+
+In this application, a JSON file is used instead of a traditional database for several reasons:
+
+- **Simplicity:** For the scope of this project, a JSON file offers a straightforward and easy-to-implement solution for data storage. It avoids the overhead of setting up and managing a full-fledged database system.
+- **Low Overhead:** Using a JSON file reduces the complexity of the project by avoiding the need for additional database management systems and their associated dependencies. This makes it easier to deploy and maintain, especially for small-scale applications.
+- **Flexibility:** JSON files are human-readable and easy to edit, making it convenient for debugging and manual data inspection. They are well-suited for applications where data volume is relatively small and does not require complex querying or transactions.
+
+For more complex applications with larger datasets or requiring sophisticated querying and transaction management, a database would be more appropriate. However, for this project, a JSON file provides an efficient and simple solution that meets the application's requirements.
+
 ## Installation
 
 1. **Clone the repository:**
