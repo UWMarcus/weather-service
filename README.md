@@ -40,7 +40,7 @@ This FastAPI application provides endpoints for fetching weather data from the O
 
 4. **Set up environment variables:**
 
-   You need to set the OPENWEATHER_API_KEY environment variable. Create a .env file or set it in your shell:
+   You need to set the OPENWEATHER_API_KEY environment variable. Set it in your shell:
 
        export OPENWEATHER_API_KEY='your_openweather_api_key'
 
